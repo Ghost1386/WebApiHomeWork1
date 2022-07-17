@@ -24,18 +24,29 @@ public class UserController : ControllerBase
     [HttpGet]
     public Task<User?> GetUser(string email, string password)
     {
-        return _userService.Get(email, password);
+        if (ModelState.IsValid)
+        {
+            return _userService.Get(email, password);
+        }
+
+        return null;
     }
     
     [HttpPost]
     public void CreateNewUser(User user)
     {
-        _userService.Create(user);
+        if (ModelState.IsValid)
+        {
+            _userService.Create(user);
+        }
     }
     
     [HttpPut]
     public void EditUser(User user)
     {
-        _userService.Edit(user);
+        if (ModelState.IsValid)
+        {
+            _userService.Edit(user);
+        }
     }
 }

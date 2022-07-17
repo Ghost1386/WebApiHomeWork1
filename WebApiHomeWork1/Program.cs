@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebApiHomeWork1.BusinessLogic.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+string connection = "Server=(localdb)\\mssqllocaldb;Database=NotebookDB;Trusted_Connection=True;";
+
+builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<RecordContext>(options => options.UseSqlServer(connection));
 
 var app = builder.Build();
 

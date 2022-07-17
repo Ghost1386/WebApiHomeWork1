@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApiHomeWork1.BusinessLogic.Services;
 using WebApiHomeWork1.Common.Models;
 
@@ -30,13 +31,19 @@ public class RecordController : ControllerBase
     [HttpPost]
     public void CreateNewUser(Record record)
     {
-        _recordService.Create(record);
+        if (ModelState.IsValid)
+        {
+            _recordService.Create(record);
+        }
     }
     
     [HttpPut]
     public void EditUser(Record record)
     {
-        _recordService.Edit(record);
+        if (ModelState.IsValid)
+        {
+            _recordService.Edit(record);
+        }
     }
     
     [HttpDelete("{id}")]
